@@ -4727,6 +4727,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 27780C3719CF9CD100C77E44 /* Build configuration list for PBXNativeTarget "mailcore ios" */;
 			buildPhases = (
+				4C4E4FE41EFC3B1A00C6B5DF /* ShellScript */,
 				27780C2D19CF9CD100C77E44 /* Sources */,
 				27780C3019CF9CD100C77E44 /* Frameworks */,
 				27780C3519CF9CD100C77E44 /* Resources */,
@@ -4855,6 +4856,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C6BD28A0170BD71100A91AC1 /* Build configuration list for PBXNativeTarget "mailcore osx" */;
 			buildPhases = (
+				4C4E4FE51EFC3B3A00C6B5DF /* ShellScript */,
 				C6BD2888170BD71100A91AC1 /* Sources */,
 				C6BD2889170BD71100A91AC1 /* Frameworks */,
 				C6BD288B170BD71100A91AC1 /* Resources */,
@@ -4961,6 +4963,32 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		4C4E4FE41EFC3B1A00C6B5DF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$SRCROOT/../scripts/get-ios.sh\"";
+		};
+		4C4E4FE51EFC3B3A00C6B5DF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$SRCROOT/../scripts/get-mac.sh\"\n";
+		};
 		C64EA780169E867600778456 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
