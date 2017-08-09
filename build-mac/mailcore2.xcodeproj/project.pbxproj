@@ -37,6 +37,7 @@
 		4B3C1BE517AC0176008BBF4C /* MCIMAPQuotaOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B3C1BDF17ABF4BB008BBF4C /* MCIMAPQuotaOperation.cpp */; };
 		4BE4029117B548B900ECC5E4 /* MCOIMAPQuotaOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4B3C1BDC17ABF306008BBF4C /* MCOIMAPQuotaOperation.h */; };
 		4BE4029217B548D900ECC5E4 /* MCIMAPQuotaOperation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4B3C1BE017ABF4BC008BBF4C /* MCIMAPQuotaOperation.h */; };
+		4C11097E1F3B518300676EDF /* NSIndexSet+MCO.m in Sources */ = {isa = PBXBuildFile; fileRef = C69BA85A17DEFCCB00D601B7 /* NSIndexSet+MCO.m */; };
 		4C4E4D711EF9AE8200C6B5DF /* MCOPOPSession.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6A81BD51706903500882C15 /* MCOPOPSession.mm */; };
 		4C4E4D721EF9AE8200C6B5DF /* MCOPOPOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6A81BE11706905600882C15 /* MCOPOPOperation.mm */; };
 		4C4E4D731EF9AE8200C6B5DF /* MCOPOPFetchHeaderOperation.mm in Sources */ = {isa = PBXBuildFile; fileRef = C6A81BD91706903E00882C15 /* MCOPOPFetchHeaderOperation.mm */; };
@@ -5117,6 +5118,7 @@
 				4C4E4E291EF9AE8F00C6B5DF /* ustring.cpp in Sources */,
 				4C4E4E2A1EF9AE8F00C6B5DF /* utrace.c in Sources */,
 				4C4E4E2C1EF9AE8F00C6B5DF /* ConvertUTF.c in Sources */,
+				4C11097E1F3B518300676EDF /* NSIndexSet+MCO.m in Sources */,
 				4C4E4E2D1EF9AE8F00C6B5DF /* MCArray.cpp in Sources */,
 				4C4E4E2E1EF9AE8F00C6B5DF /* MCAssert.c in Sources */,
 				4C4E4E2F1EF9AE8F00C6B5DF /* MCAutoreleasePool.cpp in Sources */,
