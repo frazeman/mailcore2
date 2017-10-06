@@ -93,6 +93,9 @@
 /** The identity of the IMAP server. */
 @property (nonatomic, strong, readonly) MCOIMAPIdentity * serverIdentity;
 
+/** If the server is Gmail */
+@property (nonatomic, assign, readonly) BOOL isGmail;
+
 /**
  Display name of the Gmail user. It will be nil if it's not a Gmail server.
 

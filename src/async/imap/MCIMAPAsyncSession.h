@@ -108,6 +108,7 @@ namespace mailcore {
         virtual IMAPIdentity * clientIdentity();
         virtual void setClientIdentity(IMAPIdentity * clientIdentity);
 
+        virtual bool isGmail();
         virtual String * gmailUserDisplayName() DEPRECATED_ATTRIBUTE;
 
         virtual bool isIdleEnabled();
@@ -216,6 +217,7 @@ namespace mailcore {
 #if __APPLE__
         dispatch_queue_t mDispatchQueue;
 #endif
+        bool mIsGmail;
         String * mGmailUserDisplayName;
         bool mIdleEnabled;
 

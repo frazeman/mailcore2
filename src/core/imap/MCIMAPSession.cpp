@@ -4307,6 +4307,11 @@ bool IMAPSession::allowsNewPermanentFlags() {
     return mAllowsNewPermanentFlags;
 }
 
+bool IMAPSession::isGmail()
+{
+    return mIsGmail;
+}
+
 bool IMAPSession::isDisconnected()
 {
     return mState == STATE_DISCONNECTED;

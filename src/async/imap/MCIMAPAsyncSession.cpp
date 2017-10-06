@@ -75,6 +75,7 @@ IMAPAsyncSession::IMAPAsyncSession()
 #if __APPLE__
     mDispatchQueue = dispatch_get_main_queue();
 #endif
+    mIsGmail = false;
     mGmailUserDisplayName = NULL;
     mQueueRunning = false;
     mIdleEnabled = false;
@@ -241,6 +242,11 @@ IMAPIdentity * IMAPAsyncSession::clientIdentity()
 void IMAPAsyncSession::setClientIdentity(IMAPIdentity * clientIdentity)
 {
     MC_SAFE_REPLACE_COPY(IMAPIdentity, mClientIdentity, clientIdentity);
+}
+
+bool IMAPAsyncSession::isGmail()
+{
+    return mIsGmail;
 }
 
 String * IMAPAsyncSession::gmailUserDisplayName()
@@ -871,6 +877,7 @@ IMAPMessageRenderingOperation * IMAPAsyncSession::plainTextBodyRenderingOperatio
 void IMAPAsyncSession::automaticConfigurationDone(IMAPSession * session)
 {
     MC_SAFE_REPLACE_COPY(IMAPIdentity, mServerIdentity, session->serverIdentity());
+    mIsGmail = session->isGmail();
     MC_SAFE_REPLACE_COPY(String, mGmailUserDisplayName, session->gmailUserDisplayName());
     mIdleEnabled = session->isIdleEnabled();
     setDefaultNamespace(session->defaultNamespace());
