@@ -144,7 +144,8 @@ uint64_t mailcore::RangeLeftBound(Range range)
 
 uint64_t mailcore::RangeRightBound(Range range)
 {
-    if (range.length == UINT64_MAX)
+    // If range.location + range.lenth would overflow then clamp to UINT64_MAX to indicate infinity
+    if (UINT64_MAX - range.location <= range.length)
         return UINT64_MAX;
     return range.location + range.length;
 }

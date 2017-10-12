@@ -367,12 +367,14 @@ Object * IndexSet::copy()
 
 void IndexSet::intersectsRange(Range range)
 {
-    uint64_t right = RangeRightBound(range);
-    if (right == UINT64_MAX) {
-        removeRange(RangeMake(0, range.location - 1));
+    // Remove to the left of range if there are values there
+    uint64_t left = RangeLeftBound(range);
+    if (left > 0) {
+        removeRange(RangeMake(0, left - 1));
     }
-    else {
-        removeRange(RangeMake(0, range.location - 1));
+    // Remove to the right of range if there are values there
+    uint64_t right = RangeRightBound(range);
+    if (right != UINT64_MAX) {
         removeRange(RangeMake(right + 1, UINT64_MAX));
     }
 }
@@ -405,8 +407,9 @@ bool IndexSet::isEqual(Object * otherObject)
         return false;
     }
     for(unsigned int i = 0 ; i < mCount ; i ++) {
-        if ((mRanges[i].location != otherIndexSet->mRanges[i].location) ||
-            (mRanges[i].length != otherIndexSet->mRanges[i].length)) {
+        // Calculate the range bounds using accessor functions to catch overflow and underflow cases
+        if ((RangeLeftBound(mRanges[i]) != RangeLeftBound(otherIndexSet->mRanges[i])) ||
+            (RangeRightBound(mRanges[i]) != RangeRightBound(otherIndexSet->mRanges[i]))) {
             return false;
         }
     }
