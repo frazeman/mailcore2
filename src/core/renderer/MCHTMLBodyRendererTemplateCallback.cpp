@@ -14,3 +14,13 @@ mailcore::String * HTMLBodyRendererTemplateCallback::templateForMainHeader(Messa
 {
     return MCSTR("");
 }
+
+mailcore::String * HTMLBodyRendererTemplateCallback::templateForMessage(AbstractMessage * message)
+{
+    return MCSTR("{{BODY}}");
+}
+
+mailcore::String * HTMLBodyRendererTemplateCallback::templateForEmbeddedMessage(AbstractMessagePart * part)
+{
+    return MCSTR("{{BODY}}");
+}
