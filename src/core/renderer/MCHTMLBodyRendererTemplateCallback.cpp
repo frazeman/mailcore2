@@ -24,3 +24,13 @@ mailcore::String * HTMLBodyRendererTemplateCallback::templateForEmbeddedMessage(
 {
     return MCSTR("{{BODY}}");
 }
+
+mailcore::String * HTMLBodyRendererTemplateCallback::templateForAttachment(AbstractPart * part)
+{
+    return MCSTR("");
+}
+
+mailcore::String * HTMLBodyRendererTemplateCallback::templateForAttachmentSeparator()
+{
+    return MCSTR("");
+}

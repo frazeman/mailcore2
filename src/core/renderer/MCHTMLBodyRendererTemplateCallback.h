@@ -22,6 +22,8 @@ namespace mailcore {
         virtual String * templateForMainHeader(MessageHeader * header);
         virtual String * templateForMessage(AbstractMessage * message);
         virtual String * templateForEmbeddedMessage(AbstractMessagePart * part);
+        virtual String * templateForAttachment(AbstractPart * part);
+        virtual String * templateForAttachmentSeparator();
     };
     
 }
