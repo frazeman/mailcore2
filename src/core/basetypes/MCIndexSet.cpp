@@ -215,11 +215,15 @@ void IndexSet::addRange(Range range)
     mRanges[rangeIndex] = range;
     
     mergeRanges(rangeIndex);
-    if (rangeIndex > 0) {
-        tryToMergeAdjacentRanges(rangeIndex - 1);
-    }
+    // NOTE: The trailing range must be merged before the leading range, otherwise merging
+    //       the leading range will cause the rangeIndex to be out of bounds in some cases.
+    //       (I wrote a unit test for this, but since there is no test suite here the test
+    //       is in my project not mailcore).
     if (rangeIndex < mCount - 1) {
         tryToMergeAdjacentRanges(rangeIndex);
+    }
+    if (rangeIndex > 0) {
+        tryToMergeAdjacentRanges(rangeIndex - 1);
     }
 }
 
