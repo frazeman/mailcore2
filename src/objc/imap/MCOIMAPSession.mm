@@ -139,6 +139,15 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
     return MCO_NATIVE_INSTANCE->isGmail();
 }
 
+- (BOOL) isCondstoreEnabled
+{
+    return MCO_NATIVE_INSTANCE->isCondstoreEnabled();
+}
+
+- (BOOL) isQResyncEnabled {
+    return MCO_NATIVE_INSTANCE->isQResyncEnabled();
+}
+
 - (NSString *) gmailUserDisplayName
 {
     return MCO_TO_OBJC(_session->gmailUserDisplayName());

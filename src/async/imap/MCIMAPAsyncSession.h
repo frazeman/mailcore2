@@ -109,6 +109,8 @@ namespace mailcore {
         virtual void setClientIdentity(IMAPIdentity * clientIdentity);
 
         virtual bool isGmail();
+        virtual bool isCondstoreEnabled();
+        virtual bool isQResyncEnabled();
         virtual String * gmailUserDisplayName() DEPRECATED_ATTRIBUTE;
 
         virtual bool isIdleEnabled();
@@ -218,6 +220,8 @@ namespace mailcore {
         dispatch_queue_t mDispatchQueue;
 #endif
         bool mIsGmail;
+        bool mIsCondstoreEnabled;
+        bool mIsQResyncEnabled;
         String * mGmailUserDisplayName;
         bool mIdleEnabled;
 
