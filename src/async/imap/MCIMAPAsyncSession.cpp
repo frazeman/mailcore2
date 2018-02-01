@@ -249,6 +249,16 @@ bool IMAPAsyncSession::isGmail()
     return mIsGmail;
 }
 
+bool IMAPAsyncSession::isCondstoreEnabled()
+{
+    return mIsCondstoreEnabled;
+}
+
+bool IMAPAsyncSession::isQResyncEnabled()
+{
+    return mIsQResyncEnabled;
+}
+
 String * IMAPAsyncSession::gmailUserDisplayName()
 {
     return mGmailUserDisplayName;
@@ -878,6 +888,8 @@ void IMAPAsyncSession::automaticConfigurationDone(IMAPSession * session)
 {
     MC_SAFE_REPLACE_COPY(IMAPIdentity, mServerIdentity, session->serverIdentity());
     mIsGmail = session->isGmail();
+    mIsCondstoreEnabled = session->isCondstoreEnabled();
+    mIsQResyncEnabled = session->isQResyncEnabled();
     MC_SAFE_REPLACE_COPY(String, mGmailUserDisplayName, session->gmailUserDisplayName());
     mIdleEnabled = session->isIdleEnabled();
     setDefaultNamespace(session->defaultNamespace());
