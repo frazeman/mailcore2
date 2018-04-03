@@ -96,6 +96,9 @@
 /** If the server is Gmail */
 @property (nonatomic, assign, readonly) BOOL isGmail;
 
+/** If the server supports MOVE */
+@property (nonatomic, assign, readonly) BOOL isMoveEnabled;
+
 /** Does the server support CONDSTORE */
 @property (nonatomic, assign, readonly) BOOL isCondstoreEnabled;
 
