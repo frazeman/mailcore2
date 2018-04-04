@@ -76,6 +76,7 @@ IMAPAsyncSession::IMAPAsyncSession()
     mDispatchQueue = dispatch_get_main_queue();
 #endif
     mIsGmail = false;
+    mIsMoveEnabled = false;
     mGmailUserDisplayName = NULL;
     mQueueRunning = false;
     mIdleEnabled = false;
@@ -247,6 +248,11 @@ void IMAPAsyncSession::setClientIdentity(IMAPIdentity * clientIdentity)
 bool IMAPAsyncSession::isGmail()
 {
     return mIsGmail;
+}
+
+bool IMAPAsyncSession::isMoveEnabled()
+{
+    return mIsMoveEnabled;
 }
 
 bool IMAPAsyncSession::isCondstoreEnabled()
@@ -888,6 +894,7 @@ void IMAPAsyncSession::automaticConfigurationDone(IMAPSession * session)
 {
     MC_SAFE_REPLACE_COPY(IMAPIdentity, mServerIdentity, session->serverIdentity());
     mIsGmail = session->isGmail();
+    mIsMoveEnabled = session->isMoveEnabled();
     mIsCondstoreEnabled = session->isCondstoreEnabled();
     mIsQResyncEnabled = session->isQResyncEnabled();
     MC_SAFE_REPLACE_COPY(String, mGmailUserDisplayName, session->gmailUserDisplayName());

@@ -185,6 +185,7 @@ namespace mailcore {
         
         virtual bool isIdleEnabled();
         virtual bool isXListEnabled();
+        virtual bool isMoveEnabled();
         virtual bool isCondstoreEnabled();
         virtual bool isQResyncEnabled();
         virtual bool isIdentityEnabled();
@@ -262,6 +263,7 @@ namespace mailcore {
         bool mNamespaceEnabled;
         bool mCompressionEnabled;
         bool mIsGmail;
+        bool mIsMoveEnabled;
         bool mAllowsNewPermanentFlags;
         String * mWelcomeString;
         bool mNeedsMboxMailWorkaround;

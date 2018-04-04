@@ -139,6 +139,11 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
     return MCO_NATIVE_INSTANCE->isGmail();
 }
 
+- (BOOL) isMoveEnabled
+{
+    return MCO_NATIVE_INSTANCE->isMoveEnabled();
+}
+
 - (BOOL) isCondstoreEnabled
 {
     return MCO_NATIVE_INSTANCE->isCondstoreEnabled();
