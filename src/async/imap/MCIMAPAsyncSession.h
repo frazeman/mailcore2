@@ -219,6 +219,7 @@ namespace mailcore {
         OperationQueueCallback * mOperationQueueCallback;
 #if __APPLE__
         dispatch_queue_t mDispatchQueue;
+        dispatch_queue_t configurationDispatchQueue;
 #endif
         bool mIsGmail;
         bool mIsMoveEnabled;

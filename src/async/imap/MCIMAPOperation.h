@@ -43,8 +43,7 @@ namespace mailcore {
         
         virtual void beforeMain();
         virtual void afterMain();
-        virtual void afterMainOnMainThread();
-        
+
         virtual void start();
         
         // Result.
