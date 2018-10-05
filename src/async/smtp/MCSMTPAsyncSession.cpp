@@ -63,6 +63,7 @@ namespace mailcore {
 
 SMTPAsyncSession::SMTPAsyncSession()
 {
+    printf("ZZRT SMTPAsyncSession::SMTPAsyncSession() %p\n", this);
     mSession = new SMTPSession();
     mQueue = new OperationQueue();
     mQueueCallback = new SMTPOperationQueueCallback(this);
@@ -82,6 +83,7 @@ SMTPAsyncSession::~SMTPAsyncSession()
     MC_SAFE_RELEASE(mQueueCallback);
     MC_SAFE_RELEASE(mQueue);
     MC_SAFE_RELEASE(mSession);
+    printf("ZZRT SMTPAsyncSession::~SMTPAsyncSession() %p\n", this);
 }
 
 void SMTPAsyncSession::setHostname(String * hostname)

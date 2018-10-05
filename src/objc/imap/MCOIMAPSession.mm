@@ -76,6 +76,7 @@ private:
 }
 
 - (instancetype) init {
+    printf("ZZRT MCOIMAPSession init %p\n", self);
     self = [super init];
     
     _session = new IMAPAsyncSession();
@@ -93,6 +94,7 @@ private:
     [_connectionLogger release];
     _session->release();
     [super dealloc];
+    printf("ZZRT MCOIMAPSession dealloc %p\n", self);
 }
 
 MCO_OBJC_SYNTHESIZE_STRING(setHostname, hostname)
@@ -242,6 +244,9 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
 }
 
 - (MCOIMAPFetchFoldersOperation *)fetchAllFoldersOperation {
+// NOTE I believe that at this point the C++ object has been disposed of. Either self was disposed of immediately before
+//      calling in here, or the session is over released. The crash happened during or after the call to mco_mcoObject
+//      that is in the macro. I suspect that it is after the call, and that the call returned NULL resulting in the segfault.
     IMAPOperation *coreOp = MCO_NATIVE_INSTANCE->fetchAllFoldersOperation();
     return MCO_TO_OBJC_OP(coreOp);
 }

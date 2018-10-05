@@ -59,6 +59,13 @@ MCO_OBJC_SYNTHESIZE_SCALAR(BOOL, bool, setUrgent, isUrgent)
 
 - (void) dealloc
 {
+    mailcore::Object *mco_mcObject = self.mco_mcObject;
+    if (mco_mcObject) {
+// This will prevent a crash (MAIL-451) if the session is dealloced in the complete method. A better solution is to hold on to the session
+// and dispose of it later.
+        ((mailcore::IMAPOperation *) mco_mcObject)->setImapCallback(NULL);
+    }
+
     [_session release];
     delete _imapCallback;
     [super dealloc];

@@ -14,6 +14,8 @@
 #import "MCOOperation+Private.h"
 #import "MCOSMTPOperation+Private.h"
 
+#include <stdio.h>
+
 #define nativeType mailcore::SMTPOperation
 
 typedef void (^CompletionType)(NSError *error);
@@ -29,14 +31,18 @@ public:
     MCOSMTPSendOperationCallback(MCOSMTPSendOperation * op)
     {
         mOperation = op;
+        printf("ZZRT Created MCOSMTPSendOperationCallback %p for operation %p\n", this, op);
     }
     
     virtual ~MCOSMTPSendOperationCallback()
     {
+        printf("ZZRT Dealloced MCOSMTPSendOperationCallback %p for operation %p\n", this, mOperation);
     }
     
     virtual void bodyProgress(mailcore::SMTPOperation * session, unsigned int current, unsigned int maximum) {
+        printf("ZZRT MCOSMTPSendOperationCallback %p bodyProgress will call operation bodyProgress\n", this);
         [mOperation bodyProgress:current maximum:maximum];
+        printf("ZZRT MCOSMTPSendOperationCallback %p bodyProgress did call operation bodyProgress\n", this);
     }
     
 private:
@@ -65,7 +71,8 @@ private:
 - (instancetype) initWithMCOperation:(mailcore::Operation *)op
 {
     self = [super initWithMCOperation:op];
-    
+    printf("ZZRT MCOSMTPSendOperation %p initWithMCOperation %p\n", self, op);
+
     _smtpCallback = new MCOSMTPSendOperationCallback(self);
     ((mailcore::SMTPOperation *) op)->setSmtpCallback(_smtpCallback);
     
@@ -74,6 +81,14 @@ private:
 
 - (void) dealloc
 {
+    mailcore::Object *mco_mcObject = self.mco_mcObject;
+    printf("ZZRT MCOSMTPSendOperation %p dealloc. operation pointer is %p\n", self, mco_mcObject);
+    if (mco_mcObject) {
+// This will prevent a crash (MAIL-451) if the session is dealloced in the complete method. A better solution is to hold on to the session
+// and dispose of it later.
+        ((mailcore::SMTPOperation *) mco_mcObject)->setSmtpCallback(NULL);
+    }
+
     [_progress release];
     [_completionBlock release];
     delete _smtpCallback;
@@ -108,9 +123,11 @@ private:
 
 - (void) bodyProgress:(unsigned int)current maximum:(unsigned int)maximum
 {
+    printf("ZZRT MCOSMTPSendOperation %p bodyProgress will call progress block %p\n", self, _progress);
     if (_progress != NULL) {
         _progress(current, maximum);
     }
+    printf("ZZRT MCOSMTPSendOperation %p bodyProgress did call progress block %p\n", self, _progress);
 }
 
 @end

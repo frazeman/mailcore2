@@ -73,7 +73,8 @@ private:
 
 - (instancetype) init {
     self = [super init];
-    
+    printf("ZZRT MCOSMTPSession init %p\n", self);
+
     _session = new mailcore::SMTPAsyncSession();
     _callbackBridge = new MCOSMTPCallbackBridge(self);
     
@@ -86,6 +87,7 @@ private:
     _session->setConnectionLogger(NULL);
     _session->release();
     [super dealloc];
+    printf("ZZRT MCOSMTPSession dealloc %p\n", self);
 }
 
 MCO_OBJC_SYNTHESIZE_STRING(setHostname, hostname)
