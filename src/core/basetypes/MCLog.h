@@ -24,6 +24,9 @@ extern "C" {
                        unsigned int line,
                        int dumpStack,
                        const char * format, ...) __printflike(5, 6);
+    
+    MAILCORE_EXPORT
+    void MCLogSetExternalLogger(void (*externalLoggerInit)(const char * user, const char * filename, unsigned int line, const char * format, va_list argp));
 #ifdef __cplusplus
 }
 #endif

@@ -140,6 +140,8 @@ void IMAPOperation::bodyProgressOnMainThread(void * ctx)
     struct progressContext * context = (struct progressContext *) ctx;
     if (mImapCallback != NULL) {
         mImapCallback->bodyProgress(this, context->current, context->maximum);
+    } else {
+        MCLog("IMAPOperation::bodyProgressOnMainThread called when there is no callback. Notification may be lost.");
     }
     free(context);
     release();
@@ -167,6 +169,8 @@ void IMAPOperation::itemsProgressOnMainThread(void * ctx)
     struct progressContext * context = (struct progressContext *) ctx;
     if (mImapCallback != NULL) {
         mImapCallback->itemProgress(this, context->current, context->maximum);
+    } else {
+        MCLog("IMAPOperation::itemsProgressOnMainThread called when there is no callback. Notification may be lost.");
     }
     free(context);
     release();
