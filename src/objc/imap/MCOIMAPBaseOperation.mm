@@ -61,8 +61,11 @@ MCO_OBJC_SYNTHESIZE_SCALAR(BOOL, bool, setUrgent, isUrgent)
 {
     mailcore::Object *mco_mcObject = self.mco_mcObject;
     if (mco_mcObject) {
-// This will prevent a crash (MAIL-451) if the session is dealloced in the complete method. A better solution is to hold on to the session
-// and dispose of it later.
+        // This will prevent a crash if self is dealloced immediately when the operation is completed (which
+        // happens when the caller does not retain the operation). In that case the mco_mcObject will still
+        // retain a pointer to _smtpCallback even though it is about to be deleted here, while mco_mcObject
+        // may continue to exist since it is released by self but not necessarily deleted. If another progress
+        // update is received it will message the deleted object and crash.
         ((mailcore::IMAPOperation *) mco_mcObject)->setImapCallback(NULL);
     }
 

@@ -104,9 +104,6 @@ MCO_OBJC_SYNTHESIZE_SCALAR(BOOL, bool, setShouldRunWhenCancelled, shouldRunWhenC
 {
     _started = NO;
     [self operationCompleted];
-    // Changing this to autorelease may help with some of the situations where we get a
-    // 'stale' update from a C++ operation, but it won't do so if it comes after the autorelease
-    // pool has been flushed, so I'm not that comfortable with it.
     [self release];
 }
 
