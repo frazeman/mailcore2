@@ -59,7 +59,6 @@ void SMTPSession::init()
 
 SMTPSession::SMTPSession()
 {
-    printf("ZZRT SMTPSession::SMTPSession() %p\n", this);
     init();
 }
 
@@ -73,7 +72,6 @@ SMTPSession::~SMTPSession()
     MC_SAFE_RELEASE(mUsername);
     MC_SAFE_RELEASE(mPassword);
     MC_SAFE_RELEASE(mOAuth2Token);
-    printf("ZZRT SMTPSession::~SMTPSession() %p\n", this);
 }
 
 void SMTPSession::setHostname(String * hostname)
