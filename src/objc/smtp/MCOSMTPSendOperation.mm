@@ -74,6 +74,16 @@ private:
 
 - (void) dealloc
 {
+    mailcore::Object *mco_mcObject = self.mco_mcObject;
+    if (mco_mcObject) {
+        // This will prevent a crash if self is dealloced immediately when the operation is completed (which
+        // happens when the caller does not retain the operation). In that case the mco_mcObject will still
+        // retain a pointer to _smtpCallback even though it is about to be deleted here, while mco_mcObject
+        // may continue to exist since it is released by self but not necessarily deleted. If another progress
+        // update is received it will message the deleted object and crash.
+        ((mailcore::SMTPOperation *) mco_mcObject)->setSmtpCallback(NULL);
+    }
+
     [_progress release];
     [_completionBlock release];
     delete _smtpCallback;
