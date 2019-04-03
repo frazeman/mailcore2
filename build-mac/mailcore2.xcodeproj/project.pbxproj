@@ -4894,6 +4894,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = C64EA52C169E772200778456;
@@ -6130,6 +6131,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.libmailcore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = MailCore;
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -6166,6 +6168,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.libmailcore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = MailCore;
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
@@ -6582,6 +6585,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.libmailcore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = MailCore;
 				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -6616,6 +6620,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.libmailcore.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = MailCore;
 				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
