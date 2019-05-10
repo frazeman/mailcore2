@@ -70,7 +70,8 @@ MCO_NATIVE_INSTANCE->setter((mcType) getter); \
 #define MCO_OBJC_SYNTHESIZE_DATE(setter, getter) \
 - (NSDate *) getter \
 { \
-    return [NSDate dateWithTimeIntervalSince1970:MCO_NATIVE_INSTANCE->getter()]; \
+    NSTimeInterval interval = MCO_NATIVE_INSTANCE->getter(); \
+    return (interval < 0) ? nil : [NSDate dateWithTimeIntervalSince1970:interval]; \
 } \
 \
 - (void) setter:(NSDate *)getter \

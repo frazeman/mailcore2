@@ -28,7 +28,7 @@ static clist * msg_id_from_string_array(Array * msgids);
 
 MessageHeader::MessageHeader()
 {
-    init(true, true);
+    init(false, true);
 }
 
 MessageHeader::MessageHeader(MessageHeader * other)
