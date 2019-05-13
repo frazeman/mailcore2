@@ -67,6 +67,8 @@ MCO_NATIVE_INSTANCE->setter((mcType) getter); \
 #define MCO_OBJC_SYNTHESIZE_HASHMAP(setter, getter) MCO_OBJC_SYNTHESIZE_TYPE(NSDictionary, mailcore::HashMap, setter, getter)
 #define MCO_OBJC_SYNTHESIZE_BOOL(setter, getter) MCO_OBJC_SYNTHESIZE_SCALAR(BOOL, bool, setter, getter)
 
+// NOTE: Changed from upstream:
+// If the backing `time_t` timestamp is -1, interpret it as unset / none, and return nil.
 #define MCO_OBJC_SYNTHESIZE_DATE(setter, getter) \
 - (NSDate *) getter \
 { \

@@ -28,6 +28,10 @@ static clist * msg_id_from_string_array(Array * msgids);
 
 MessageHeader::MessageHeader()
 {
+    // NOTE: Changed from upstream:
+    // Set `generateDate` to false to keep both `mDate` and `mReceivedDate` as -1 until a date is
+    // successfully parsed from the message header or internal date. This is used to return nil via
+    // the ObjC binding when the date is missing or isn't valid as per RFC 822.
     init(false, true);
 }
 
