@@ -17,6 +17,10 @@
 #include "MCHashMap.h"
 #include "MCUtils.h"
 
+#ifndef _MSC_VER
+#include <sys/param.h>
+#endif
+
 using namespace mailcore;
 
 void IndexSet::init()
@@ -245,9 +249,13 @@ void IndexSet::mergeRanges(unsigned int rangeIndex)
 {
     int right = rangeIndex;
     
+    uint64_t leftBound = RangeLeftBound(mRanges[rangeIndex]);
+    uint64_t rightBound = RangeRightBound(mRanges[rangeIndex]);
     for(int i = rangeIndex ; i < mCount ; i ++) {
         if (RangeHasIntersection(mRanges[rangeIndex], mRanges[i])) {
             right = i;
+            leftBound = MIN(leftBound, RangeLeftBound(mRanges[i]));
+            rightBound = MAX(rightBound, RangeRightBound(mRanges[i]));
         }
         else {
             break;
@@ -257,9 +265,7 @@ void IndexSet::mergeRanges(unsigned int rangeIndex)
     if (right == rangeIndex)
         return;
     
-    IndexSet * indexSet = RangeUnion(mRanges[rangeIndex], mRanges[right]);
-    MCAssert(indexSet->rangesCount() > 0);
-    Range range = indexSet->allRanges()[0];
+    Range range = RangeMake(leftBound, rightBound - leftBound);
     removeRangeIndex(rangeIndex + 1, right - rangeIndex);
     mRanges[rangeIndex] = range;
 }
