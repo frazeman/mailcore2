@@ -492,18 +492,18 @@ void SMTPSession::login(ErrorCode * pError)
         if (mSmtp->auth & MAILSMTP_AUTH_DIGEST_MD5) {
             setAuthType((AuthType) (authType() | AuthTypeSASLDIGESTMD5));
         }
+        else if (mSmtp->auth & MAILSMTP_AUTH_GSSAPI) {
+            setAuthType((AuthType) (authType() | AuthTypeSASLGSSAPI));
+        }
+        else if (mSmtp->auth & MAILSMTP_AUTH_NTLM) {
+            setAuthType((AuthType) (authType() | AuthTypeSASLNTLM));
+        }
 #endif
         else if (mSmtp->auth & MAILSMTP_AUTH_CRAM_MD5) {
             setAuthType((AuthType) (authType() | AuthTypeSASLCRAMMD5));
         }
-        else if (mSmtp->auth & MAILSMTP_AUTH_GSSAPI) {
-            setAuthType((AuthType) (authType() | AuthTypeSASLGSSAPI));
-        }
         else if (mSmtp->auth & MAILSMTP_AUTH_SRP) {
             setAuthType((AuthType) (authType() | AuthTypeSASLSRP));
-        }
-        else if (mSmtp->auth & MAILSMTP_AUTH_NTLM) {
-            setAuthType((AuthType) (authType() | AuthTypeSASLNTLM));
         }
         else if (mSmtp->auth & MAILSMTP_AUTH_KERBEROS_V4) {
             setAuthType((AuthType) (authType() | AuthTypeSASLKerberosV4));
@@ -630,7 +630,7 @@ void SMTPSession::login(ErrorCode * pError)
             
             if (mOAuth2Token == NULL) {
                 r = MAILSMTP_ERROR_STREAM;
-            } 
+            }
             else {
                 r = mailsmtp_oauth2_outlook_authenticate(mSmtp, utf8Username, MCUTF8(mOAuth2Token));
             }
