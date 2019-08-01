@@ -192,6 +192,20 @@ bool IMAPAsyncSession::isCheckCertificateEnabled()
     return mCheckCertificateEnabled;
 }
 
+void IMAPAsyncSession::setEnableMalformedAddressHack(bool enabled)
+{
+    mEnableMalformedAddressHack = enabled;
+    for(unsigned int i = 0 ; i < mSessions->count() ; i ++) {
+        IMAPAsyncConnection * connection = (IMAPAsyncConnection *) mSessions->objectAtIndex(i);
+        connection->setEnableMalformedAddressHack(enabled);
+    }
+}
+
+bool IMAPAsyncSession::enableMalformedAddressHack()
+{
+    return mEnableMalformedAddressHack;
+}
+
 void IMAPAsyncSession::setVoIPEnabled(bool enabled)
 {
     mVoIPEnabled = enabled;
@@ -352,6 +366,7 @@ IMAPAsyncConnection * IMAPAsyncSession::availableSession()
     if ((mMaximumConnections == 0) || (mSessions->count() < mMaximumConnections)) {
         chosenSession = session();
         mSessions->addObject(chosenSession);
+        chosenSession->setEnableMalformedAddressHack(mEnableMalformedAddressHack);
         return chosenSession;
     }
 

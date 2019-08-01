@@ -105,6 +105,9 @@
 /** Does the server support QRESYNC */
 @property (nonatomic, assign, readonly) BOOL isQResyncEnabled;
 
+/** Enables or disables the malformed address hack for this session */
+@property (nonatomic, assign) BOOL enableMalformedAddressHack;
+
 /**
  Display name of the Gmail user. It will be nil if it's not a Gmail server.
 

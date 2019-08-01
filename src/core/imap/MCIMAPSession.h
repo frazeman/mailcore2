@@ -55,6 +55,9 @@ namespace mailcore {
         
         virtual void setCheckCertificateEnabled(bool enabled);
         virtual bool isCheckCertificateEnabled();
+
+        virtual void setEnableMalformedAddressHack(bool enabled);
+        virtual bool enableMalformedAddressHack();
         
         virtual void setVoIPEnabled(bool enabled);
         virtual bool isVoIPEnabled();
@@ -276,6 +279,7 @@ namespace mailcore {
         bool mRamblerRuServer;
         bool mHermesServer;
         bool mQipServer;
+        bool malformedAddressWorkaroundEnabled;
         
         unsigned int mLastFetchedSequenceNumber;
         String * mCurrentFolder;
