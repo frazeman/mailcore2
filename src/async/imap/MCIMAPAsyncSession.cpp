@@ -46,6 +46,8 @@
 #include "MCIMAPMessageRenderingOperation.h"
 #include "MCIMAPCustomCommandOperation.h"
 
+#include <libetpan/libetpan.h>
+
 #define DEFAULT_MAX_CONNECTIONS 3
 
 using namespace mailcore;
