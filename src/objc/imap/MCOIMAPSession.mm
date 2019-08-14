@@ -129,6 +129,11 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
     return _session->enableMalformedAddressHack();
 }
 
+- (BOOL)supportsMalformedAddressHack
+{
+    return _session->supportsMalformedAddressHack();
+}
+
 - (MCOIMAPIdentity *) clientIdentity
 {
     return MCO_OBJC_BRIDGE_GET(clientIdentity);

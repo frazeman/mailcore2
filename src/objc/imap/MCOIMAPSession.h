@@ -108,6 +108,9 @@
 /** Enables or disables the malformed address hack for this session */
 @property (nonatomic, assign) BOOL enableMalformedAddressHack;
 
+/** Returns true if malformed address hack support was complied, false if not */
+@property (nonatomic, readonly) BOOL supportsMalformedAddressHack;
+
 /**
  Display name of the Gmail user. It will be nil if it's not a Gmail server.
 

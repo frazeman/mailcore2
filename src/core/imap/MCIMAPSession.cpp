@@ -531,8 +531,8 @@ bool IMAPSession::isCheckCertificateEnabled()
 
 void IMAPSession::setEnableMalformedAddressHack(bool enabled)
 {
-    malformedAddressWorkaroundEnabled = enabled;
 #ifdef LIBETPAN_HAS_MALFORMED_ADDRESS_HACK
+    malformedAddressWorkaroundEnabled = enabled;
     mailimap_set_malformed_address_workaround_enabled(mImap, enabled);
 #endif
 }

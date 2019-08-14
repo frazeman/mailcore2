@@ -194,16 +194,27 @@ bool IMAPAsyncSession::isCheckCertificateEnabled()
 
 void IMAPAsyncSession::setEnableMalformedAddressHack(bool enabled)
 {
+#ifdef LIBETPAN_HAS_MALFORMED_ADDRESS_HACK
     mEnableMalformedAddressHack = enabled;
     for(unsigned int i = 0 ; i < mSessions->count() ; i ++) {
         IMAPAsyncConnection * connection = (IMAPAsyncConnection *) mSessions->objectAtIndex(i);
         connection->setEnableMalformedAddressHack(enabled);
     }
+#endif
 }
 
 bool IMAPAsyncSession::enableMalformedAddressHack()
 {
     return mEnableMalformedAddressHack;
+}
+
+bool IMAPAsyncSession::supportsMalformedAddressHack()
+{
+#ifdef LIBETPAN_HAS_MALFORMED_ADDRESS_HACK
+    return true;
+#else
+    return false;
+#endif
 }
 
 void IMAPAsyncSession::setVoIPEnabled(bool enabled)

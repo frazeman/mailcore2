@@ -81,6 +81,7 @@ namespace mailcore {
 
         virtual void setEnableMalformedAddressHack(bool enabled);
         virtual bool enableMalformedAddressHack();
+        virtual bool supportsMalformedAddressHack();
         
         virtual void setVoIPEnabled(bool enabled);
         virtual bool isVoIPEnabled();
