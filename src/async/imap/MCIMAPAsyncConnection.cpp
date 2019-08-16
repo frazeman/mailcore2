@@ -217,6 +217,16 @@ bool IMAPAsyncConnection::isCheckCertificateEnabled()
     return mSession->isCheckCertificateEnabled();
 }
 
+void IMAPAsyncConnection::setEnableMalformedAddressHack(bool enabled)
+{
+    mSession->setEnableMalformedAddressHack(enabled);
+}
+
+bool IMAPAsyncConnection::enableMalformedAddressHack()
+{
+    return mSession->enableMalformedAddressHack();
+}
+
 void IMAPAsyncConnection::setVoIPEnabled(bool enabled)
 {
     mSession->setVoIPEnabled(enabled);

@@ -304,7 +304,20 @@ get_prebuilt_dep()
   
   installed_version="`defaults read "$installed_versions_path" "$name" 2>/dev/null`"
   if test ! -d "$scriptpath/../Externals/$name" ; then
-    installed_version=
+    echo "$name is not in Externals. Checking built products dir"
+
+    if test -f "${BUILT_PRODUCTS_DIR}/${name}.a" ; then
+      echo "Found product in built products dir, using that version. The version number of that"
+      echo "version is unknown, it is your responsability to ensure that it is up to date and is"
+      echo "configured properly with any required headers copied to $BUILT_PRODUCTS_DIR"
+
+      # Mark the version as up to date, even though the true version number is not known
+      installed_version="`defaults read "$versions_path" "$name" 2>/dev/null`"
+    else
+      # There is no version in BUILT_PRODUCTS_DIR so clear installed_version in order to 
+      # download a new copy
+      installed_version=
+    fi
   fi
   if test "x$installed_version" = x ; then
     installed_version="none"

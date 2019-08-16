@@ -529,6 +529,19 @@ bool IMAPSession::isCheckCertificateEnabled()
     return mCheckCertificateEnabled;
 }
 
+void IMAPSession::setEnableMalformedAddressHack(bool enabled)
+{
+#ifdef LIBETPAN_HAS_MALFORMED_ADDRESS_HACK
+    malformedAddressWorkaroundEnabled = enabled;
+    mailimap_set_malformed_address_workaround_enabled(mImap, enabled);
+#endif
+}
+
+bool IMAPSession::enableMalformedAddressHack()
+{
+    return malformedAddressWorkaroundEnabled;
+}
+
 void IMAPSession::setVoIPEnabled(bool enabled)
 {
     mVoIPEnabled = enabled;
@@ -616,6 +629,9 @@ void IMAPSession::setup()
     mailimap_set_timeout(mImap, timeout());
     mailimap_set_progress_callback(mImap, body_progress, IMAPSession::items_progress, this);
     mailimap_set_logger(mImap, logger, this);
+#ifdef LIBETPAN_HAS_MALFORMED_ADDRESS_HACK
+    mailimap_set_malformed_address_workaround_enabled(mImap, malformedAddressWorkaroundEnabled);
+#endif
 }
 
 void IMAPSession::unsetup()

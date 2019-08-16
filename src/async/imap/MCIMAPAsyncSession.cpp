@@ -46,6 +46,8 @@
 #include "MCIMAPMessageRenderingOperation.h"
 #include "MCIMAPCustomCommandOperation.h"
 
+#include <libetpan/libetpan.h>
+
 #define DEFAULT_MAX_CONNECTIONS 3
 
 using namespace mailcore;
@@ -190,6 +192,31 @@ void IMAPAsyncSession::setCheckCertificateEnabled(bool enabled)
 bool IMAPAsyncSession::isCheckCertificateEnabled()
 {
     return mCheckCertificateEnabled;
+}
+
+void IMAPAsyncSession::setEnableMalformedAddressHack(bool enabled)
+{
+#ifdef LIBETPAN_HAS_MALFORMED_ADDRESS_HACK
+    mEnableMalformedAddressHack = enabled;
+    for(unsigned int i = 0 ; i < mSessions->count() ; i ++) {
+        IMAPAsyncConnection * connection = (IMAPAsyncConnection *) mSessions->objectAtIndex(i);
+        connection->setEnableMalformedAddressHack(enabled);
+    }
+#endif
+}
+
+bool IMAPAsyncSession::enableMalformedAddressHack()
+{
+    return mEnableMalformedAddressHack;
+}
+
+bool IMAPAsyncSession::supportsMalformedAddressHack()
+{
+#ifdef LIBETPAN_HAS_MALFORMED_ADDRESS_HACK
+    return true;
+#else
+    return false;
+#endif
 }
 
 void IMAPAsyncSession::setVoIPEnabled(bool enabled)
@@ -352,6 +379,7 @@ IMAPAsyncConnection * IMAPAsyncSession::availableSession()
     if ((mMaximumConnections == 0) || (mSessions->count() < mMaximumConnections)) {
         chosenSession = session();
         mSessions->addObject(chosenSession);
+        chosenSession->setEnableMalformedAddressHack(mEnableMalformedAddressHack);
         return chosenSession;
     }
 

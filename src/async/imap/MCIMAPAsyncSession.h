@@ -78,6 +78,10 @@ namespace mailcore {
         
         virtual void setCheckCertificateEnabled(bool enabled);
         virtual bool isCheckCertificateEnabled();
+
+        virtual void setEnableMalformedAddressHack(bool enabled);
+        virtual bool enableMalformedAddressHack();
+        virtual bool supportsMalformedAddressHack();
         
         virtual void setVoIPEnabled(bool enabled);
         virtual bool isVoIPEnabled();
@@ -207,6 +211,7 @@ namespace mailcore {
         ConnectionType mConnectionType;
         bool mCheckCertificateEnabled;
         bool mVoIPEnabled;
+        bool mEnableMalformedAddressHack;
         IMAPNamespace * mDefaultNamespace;
         time_t mTimeout;
         bool mAllowsFolderConcurrentAccessEnabled;
