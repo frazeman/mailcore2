@@ -45,10 +45,20 @@ void MCLogInternal(const char * user,
     va_end(argp);
 }
 
+static void (*externalLogger)(const char * user, const char * filename, unsigned int line, const char * format, va_list argp) = NULL;
+
+void MCLogSetExternalLogger(void (*externalLoggerInit)(const char * user, const char * filename, unsigned int line, const char * format, va_list argp))
+{
+    externalLogger = externalLoggerInit;
+}
+
 static void logInternalv(FILE * file,
     const char * user, const char * filename, unsigned int line,
     int dumpStack, const char * format, va_list argp)
 {
+    if (externalLogger)
+        externalLogger(user, filename, line, format, argp);
+        
     if (!MCLogEnabled)
         return;
     
